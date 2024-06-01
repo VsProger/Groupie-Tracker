@@ -12,6 +12,8 @@ func init() {
 }
 
 func StartServer() {
+	staticHandler := http.StripPrefix("/static/", http.FileServer(http.Dir("./static")))
+	http.Handle("/static/", staticHandler)
 	http.HandleFunc("/", Home)
 	// http.HandleFunc("/artist", Artist)
 	http.Handle("/favicon.ico", http.NotFoundHandler())

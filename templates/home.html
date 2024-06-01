@@ -2,20 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Groupie-Tracker</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
 </head>
 <body>
-    <ui>
-    {{range .}}
-        <li>
+    <header>
+        <a href="/"><h1>Groupie-Tracker</h1></a>
+    </header>
+    <div class="artist-container">
+        {{range .}}
+        <div class="artist-card">
             <a href="/artist/{{.ID}}">
-            <img src="{{.Image}}" alt="{{.Name}}" width="100">
-            <h2>{{.Name}}</h2>
-        </a>
-    </li>
+                <img src="{{.Image}}" alt="{{.Name}}" class="artist-image">
+                <h2 class="artist-name">{{.Name}}</h2>
+            </a>
+        </div>
         {{end}}
-    </ui>
+    </div>
+    <footer>
+        <p>&copy; 2024 Groupie-Tracker. All rights reserved.</p>
+        <p>Unnecessary Information: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.</p>
+    </footer>
 </body>
 </html>

@@ -11,10 +11,12 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	}
 	if r.URL.Path != "/" {
 		displayError(w, "Page Not Found", http.StatusNotFound)
+		return
 	}
 	artists, err := FetchArtists()
 	if err != nil {
 		displayError(w, "Internal Server Error", http.StatusInternalServerError)
+		return
 	}
 	tpl.ExecuteTemplate(w, "home.html", artists)
 }
