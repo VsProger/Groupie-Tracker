@@ -4,25 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Groupie-Tracker</title>
-    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
-    <header>
-        <a href="/"><h1>Groupie-Tracker</h1></a>
-    </header>
-    <div class="artist-container">
-        {{range .}}
-        <div class="artist-card">
-            <a href="/artist/{{.ID}}">
-                <img src="{{.Image}}" alt="{{.Name}}" class="artist-image">
-                <h2 class="artist-name">{{.Name}}</h2>
-            </a>
-        </div>
-        {{end}}
+<header>
+    <h1>Groupie-Tracker</h1>
+</header>
+<div class="artist-container">
+    {{range .}}
+    <div class="artist-card">
+        <a href="/artist/{{.ID}}">
+            <img src="{{.Image}}" alt="{{.Name}}" class="artist-image">
+            <h2 class="artist-name">{{.Name}}</h2>
+        </a>
     </div>
-    <footer>
-        <p>&copy; 2024 Groupie-Tracker. All rights reserved.</p>
-        <p>Unnecessary Information: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.</p>
-    </footer>
+    {{end}}
+</div>
+<footer>
+    <p>&copy; 2024 Groupie-Tracker by bsaliyev and nsergaziy</p>
+</footer>
 </body>
 </html>

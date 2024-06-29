@@ -1,94 +1,66 @@
-# Groupie Trackers
+# Groupie-Tracker
 
-Groupie Trackers is a project that uses a provided API to create a user-friendly website displaying information about various bands and artists. The project focuses on data visualization and client-server interactions, utilizing Go for the backend development.
+## Created by:
+1. bsaliyev (Baurzhan)
+2. nsergaziy (Nurkhat)
 
-## Table of Contents
+## Overview
+Groupie-Tracker is a web application built with Go that allows users to track musical artists and their details, such as members, creation date, first album, concert locations, concert dates, and relations. The application fetches artist data from an external API and presents it in a user-friendly interface.
 
-- [Objectives](#objectives)
-- [API Structure](#api-structure)
-- [Project Requirements](#project-requirements)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Features](#features)
-- [Testing](#testing)
-
-## Objectives
-
-The main objectives of this project are:
-- To create a website that displays band and artist information using various data visualization techniques.
-- To implement client-server interactions for dynamic data retrieval and display.
-- To ensure the backend, written in Go, is stable and reliable.
-- To follow best coding practices and include unit tests for code reliability.
-
-## API Structure
-
-The provided API consists of four main parts:
-
-1. **Artists**: Contains information about bands and artists, including:
-   - Names
-   - Images
-   - Year they began their activity
-   - Date of their first album
-   - Band members
-
-2. **Locations**: Contains information about the locations of past and upcoming concerts.
-
-3. **Dates**: Contains information about the dates of past and upcoming concerts.
-
-4. **Relation**: Links the artists, dates, and locations components, integrating the data across the API.
-
-## Project Requirements
-
-- **Data Visualization**: Display band and artist information using blocks, cards, tables, lists, pages, graphics, etc.
-- **Client-Server Interaction**: Implement a feature that triggers client-server communication, sending a request from the client to the server and receiving a response.
-- **Backend in Go**: Develop a stable backend using Go, ensuring no crashes and correct functionality of all pages.
-- **Best Practices**: Follow coding best practices and include unit tests.
-
-## Installation
-
-1. Clone the repository:
-   ```
-   git clone https://github.com/VsProger/Groupie-Tracker.git
-   cd groupie-trackers
-   ```
-2. Install dependencies:
-    ```
-    go mod tidy
-    ```
-3. Start the server:
-   ```
-   go run main.go
-   ```
 ## Usage
 
-To use Groupie Trackers, follow these steps:
+1. Clone the repository: git clone git@git.01.alem.school:bsaliyev/groupie-tracker.git
+2. Navigate to the project directory: cd groupie-tracker
+3. Start the server: `go run cmd/main.go`
+4. Open your browser and navigate to http://localhost:8080 to use the application.
 
-1. **Access the Website**: Open your web browser and navigate to [http://localhost:8080](http://localhost:8080).
+## Objective
 
-2. **Explore Band Information**: Browse through the displayed information about various bands and artists.
+The Groupie-Tracker project aims to:
+1. Develop skills in web development using Go.
+2. Learn to interact with external APIs and handle JSON data.
+3. Practice creating and using templates for dynamic HTML content.
+4. Implement robust error handling and input validation.
 
-3. **Interact with the Website**: Trigger client-server interactions by interacting with the website's interface to view dynamic updates and data visualizations.
+## Components
 
-## Features
+### Project Structure
 
-- **Dynamic Data Visualization**: Display artist and concert information using various visual formats such as blocks, cards, tables, lists, and graphs.
-  
-- **Client-Server Interaction**: Implement actions that communicate with the server to fetch and display data in response to user interactions.
-  
-- **Robust Backend**: Utilize Go for backend development to ensure stability, reliability, and efficient handling of data requests.
-  
-- **Error Handling**: Gracefully manage errors to provide a seamless user experience and prevent crashes.
+The Groupie-Tracker project is structured as follows:
 
-## Testing
+```
+/Groupie-Tracker
+├── /cmd
+│   └── main.go
+├── /handlers
+│   ├── artist.go
+│   ├── handlers.go
+│   ├── server.go
+│   └── utils.go
+├── /static
+│   ├── /css
+│   │   └── styles.css
+├── /templates
+│   ├── error.html
+│   ├── artist.html
+│   └── home.html
+├── go.mod
+└── README.md
 
-To run unit tests for Groupie Trackers:
+```
 
-1. Ensure you have Go installed on your system.
+### File Descriptions
 
-2. Navigate to the project directory in your terminal.
+- `main.go`: The entry point of the application, starting the server.
+- `artist.go`: Contains the Artist struct, functions to fetch artist data from the API, and the ArtistHandler.
+- `handlers.go`: Defines the Home handler for the home page.
+- `server.go`: Initializes and starts the HTTP server, setting up routes and template parsing.
+- `utils.go`: Provides utility functions, such as displayError, for error handling.
 
-3. Run the following command to execute all unit tests:
 
-   ```
-   go test ./...
-   ```
+## Running Tests
+
+To run the unit tests for the Groupie-Tracker project:
+
+1. Navigate to the project root directory.
+2. Run `go test ./handlers` in the terminal. This will execute tests defined in main_test.go, ensuring the handlers work as expected.
