@@ -37,6 +37,26 @@ type FetchArtistsFunc func() ([]Artist, error)
 
 var FetchArtists FetchArtistsFunc = fetchArtists
 
+func formatLocation(location string) string {
+
+	parts := strings.Split(location, "-")
+
+	for i, part := range parts {
+		part = strings.ReplaceAll(part, "_", " ")
+
+		if strings.ToLower(part) == "usa" || strings.ToLower(part) == "uk" {
+			parts[i] = strings.ToUpper(part)
+		} else {
+			words := strings.Fields(part)
+			for j, word := range words {
+				words[j] = strings.Title(word)
+			}
+			parts[i] = strings.Join(words, " ")
+		}
+	}
+	return strings.Join(parts, "-")
+}
+
 func fetchArtists() ([]Artist, error) {
 	url := "https://groupietrackers.herokuapp.com/api/artists"
 	res, err := http.Get(url)
@@ -78,8 +98,6 @@ func fetchRelations(id string) (DatesLocations, error) {
 
 	return datesLocations, nil
 }
-
-// func fetchDates() (Locations, error){}
 
 func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
@@ -160,16 +178,19 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	datesLocations, err := fetchRelations(artistIDStr)
-	// fmt.Println(datesLocations, err)
 
 	data := struct {
 		Artist         Artist
-		DatesLocations DatesLocations
+		DatesLocations map[string][]string
 	}{
 		Artist:         artist,
-		DatesLocations: datesLocations,
+		DatesLocations: make(map[string][]string),
 	}
-	// fmt.Println(data)
+
+	for city, dates := range datesLocations {
+		formattedCity := formatLocation(city)
+		data.DatesLocations[formattedCity] = dates
+	}
 
 	err = tpl.ExecuteTemplate(w, "artist.html", data)
 }

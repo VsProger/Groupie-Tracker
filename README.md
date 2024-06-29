@@ -35,6 +35,7 @@ The Groupie-Tracker project is structured as follows:
 ├── /handlers
 │   ├── artist.go
 │   ├── handlers.go
+│   ├── main_test.go
 │   ├── server.go
 │   └── utils.go
 ├── /static
