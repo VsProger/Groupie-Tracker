@@ -1,7 +1,9 @@
 package handlers
 
 import (
+	"fmt"
 	"html/template"
+	"log"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -18,7 +20,10 @@ func initTemplates(basePath string) {
 }
 
 func StartServer() {
-	basePath, _ := os.Getwd()
+	basePath, err := os.Getwd()
+	if err != nil {
+		log.Fatalln(err)
+	}
 	initTemplates(basePath)
 
 	staticHandler := http.StripPrefix("/static/", http.FileServer(http.Dir(filepath.Join(basePath, "static"))))
@@ -27,5 +32,8 @@ func StartServer() {
 	http.HandleFunc("/artist/", ArtistHandler)
 	http.Handle("/favicon.ico", http.NotFoundHandler())
 
-	http.ListenAndServe(":8080", nil)
+	err = http.ListenAndServe(":8080", nil)
+	if err != nil {
+		fmt.Println(err)
+	}
 }
